@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rodgerskyle/Piezas.svg?branch=master)](https://travis-ci.org/rodgerskyle/Piezas)
+[![Coverage Status](https://coveralls.io/repos/github/rodgerskyle/Piezas/badge.svg?branch=master)](https://coveralls.io/github/rodgerskyle/Piezas?branch=master)
 # Piezas
 
 ## Associated Enumerated Types
