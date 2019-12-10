@@ -23,6 +23,8 @@
 **/
 Piezas::Piezas() 
 {
+    std::vector<std::vector<Piece>> temp(BOARD_ROWS, std::vector<Piece> (BOARD_COLS));
+    board = temp;
     for (int i=0; i<BOARD_ROWS; i++) {
         for (int j=0; j<BOARD_COLS; j++) {
             board[i][j] = Blank;
@@ -61,11 +63,7 @@ Piece Piezas::dropPiece(int column)
     while (row < BOARD_ROWS) {
         if (board[row][column]==Blank) {
             board[row][column] = turn;
-            //turn = turn==X ? O : X;
-            if (turn==X)
-                turn = O;
-            else 
-                turn = X;
+            turn = turn==X ? O : X;
             return board[row][column];
         }
         row++;
