@@ -1,3 +1,4 @@
+
 #include "Piezas.h"
 #include <vector>
 /** CLASS Piezas
@@ -14,14 +15,20 @@
  * So that a piece dropped in column 2 should take [0,2] and the next one
  * dropped in column 2 should take [1,2].
 **/
-
+ 
 
 /**
  * Constructor sets an empty board (default 3 rows, 4 columns) and 
  * specifies it is X's turn first
 **/
-Piezas::Piezas()
+Piezas::Piezas() 
 {
+    for (int i=0; i<BOARD_ROWS; i++) {
+        for (int j=0; j<BOARD_COLS; j++) {
+            board[i][j] = Blank;
+        }
+    }
+    turn = X;
 }
 
 /**
@@ -30,6 +37,11 @@ Piezas::Piezas()
 **/
 void Piezas::reset()
 {
+    for (int i=0; i<BOARD_ROWS; i++) {
+        for (int j=0; j<BOARD_COLS; j++) {
+            board[i][j] = Blank;
+        }
+    }
 }
 
 /**
@@ -42,6 +54,19 @@ void Piezas::reset()
 **/ 
 Piece Piezas::dropPiece(int column)
 {
+    if (column > 3 || column < 0)
+        return Invalid;
+    int row = 0;
+    while (row < BOARD_ROWS) {
+        if (board[row][column]==Blank) {
+            board[row][column] = turn;
+            turn = turn==X ? O : X;
+            return turn==X ? O : X;
+        }
+        row++;
+    }
+    //You picked a column that was taken
+    turn = turn==X ? O : X;
     return Blank;
 }
 
@@ -51,6 +76,10 @@ Piece Piezas::dropPiece(int column)
 **/
 Piece Piezas::pieceAt(int row, int column)
 {
+    if (row < BOARD_ROWS && row > 0 && column < BOARD_COLS && column > 0)
+        return Invalid;
+    else if (board[row][column] != Blank)
+        return board[row][column];
     return Blank;
 }
 
@@ -65,5 +94,56 @@ Piece Piezas::pieceAt(int row, int column)
 **/
 Piece Piezas::gameState()
 {
-    return Blank;
+    //X Highest & O Highest
+    int Xscore, Oscore = 0;
+    //X current & O current
+    int Xcur, Ocur = 0;
+
+    //For Horizontal check
+    for (int i=0; i<BOARD_ROWS; i++) {
+        Xcur, Ocur = 0;
+        for (int j=0; j<BOARD_COLS; j++) {
+            if (board[i][j] == Blank)
+                return Invalid;
+            else if (board[i][j] == X) {
+                Xcur += 1;
+                if (Xcur > Xscore)
+                    Xscore = Xcur;
+                Ocur = 0;
+            }
+            else {
+                Ocur += 1;
+                if (Ocur > Oscore)
+                    Oscore = Ocur;
+                Xcur = 0;
+            }
+        }
+    }
+
+    //For vertical check
+    for (int i=0; i<BOARD_COLS; i++) {
+        Xcur, Ocur = 0;
+        for (int j=0; j<BOARD_ROWS; j++) {
+            if (board[i][j] == X) {
+                Xcur += 1;
+                if (Xcur > Xscore)
+                    Xscore = Xcur;
+                Ocur = 0;
+            }
+            else {
+                Ocur += 1;
+                if (Ocur > Oscore)
+                    Oscore = Ocur;
+                Xcur = 0;
+            }
+        }
+    }
+
+    //Win Check
+    if (Oscore > Xscore)
+        return O;
+    else if (Xscore > Oscore)
+        return X;
+    else
+        return Blank;
 }
