@@ -77,8 +77,8 @@ TEST(PiezasTest, gameStateXWin) {
 	Game.dropPiece(2); //O
 	Game.dropPiece(0); //X
 	Game.dropPiece(1); //O
-	Game.dropPiece(3); //X
-	Game.dropPiece(1); //O
+	Game.dropPiece(1); //X
+	Game.dropPiece(3); //O
 	Game.dropPiece(3); //X
 	Game.dropPiece(2); //O
 	Game.dropPiece(1); //X
