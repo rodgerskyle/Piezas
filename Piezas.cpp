@@ -127,7 +127,7 @@ Piece Piezas::gameState()
     for (int i=0; i<BOARD_COLS; i++) {
         Xcur = 0, Ocur = 0;
         for (int j=0; j<BOARD_ROWS; j++) {
-            if (board[i][j] == X) {
+            if (board[j][i] == X) {
                 Xcur += 1;
                 if (Xcur > Xscore)
                     Xscore = Xcur;
