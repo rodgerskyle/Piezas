@@ -83,6 +83,7 @@ TEST(PiezasTest, gameStateXWin) {
 	Game.dropPiece(2); //O
 	Game.dropPiece(1); //X
 	Game.dropPiece(3); //O
+	Game.dropPiece(2); //X
 	ASSERT_EQ(Game.gameState(), X);
 }
 
