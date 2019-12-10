@@ -61,7 +61,11 @@ Piece Piezas::dropPiece(int column)
     while (row < BOARD_ROWS) {
         if (board[row][column]==Blank) {
             board[row][column] = turn;
-            turn = turn==X ? O : X;
+            //turn = turn==X ? O : X;
+            if (turn==X)
+                turn = O;
+            else 
+                turn = X;
             return board[row][column];
         }
         row++;
