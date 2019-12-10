@@ -89,6 +89,49 @@ TEST(PiezasTest, gameStateXWin) {
 	ASSERT_EQ(Game.gameState(), X);
 }
 
+TEST(PiezasTest, gameStateXVerticalTest) {
+	Piezas Game;
+	Game.dropPiece(0); //X
+	Game.dropPiece(2); //O
+	Game.dropPiece(0); //X
+	Game.dropPiece(0); //O
+	Game.dropPiece(1); //X
+	Game.dropPiece(0); //O Skip
+	Game.dropPiece(1); //X
+	Game.dropPiece(0); //O Skip
+	Game.dropPiece(1); //X
+	Game.dropPiece(2); //O
+	Game.dropPiece(2); //X
+	Game.dropPiece(0); //O Skip
+	Game.dropPiece(3); //X
+	Game.dropPiece(3); //O
+	Game.dropPiece(0); //X Skip
+	Game.dropPiece(3); //O
+	ASSERT_EQ(Game.gameState(), X);
+}
+
+TEST(PiezasTest, gameStateOVerticalTest) {
+	Piezas Game;
+	Game.dropPiece(5); //Skip X
+	Game.dropPiece(0); //O
+	Game.dropPiece(2); //X
+	Game.dropPiece(0); //O
+	Game.dropPiece(0); //X
+	Game.dropPiece(1); //O
+	Game.dropPiece(0); //X Skip
+	Game.dropPiece(1); //O
+	Game.dropPiece(0); //X Skip
+	Game.dropPiece(1); //O
+	Game.dropPiece(2); //X
+	Game.dropPiece(2); //O
+	Game.dropPiece(0); //X Skip
+	Game.dropPiece(3); //O
+	Game.dropPiece(3); //X
+	Game.dropPiece(0); //O Skip
+	Game.dropPiece(3); //X
+	ASSERT_EQ(Game.gameState(), O);
+}
+
 TEST(PiezasTest, gameStateOWin) {
 	Piezas Game;
 	Game.dropPiece(1); //X
