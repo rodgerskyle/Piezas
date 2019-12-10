@@ -19,12 +19,14 @@ TEST(PiezasTest, sanityCheck)
 	ASSERT_TRUE(true);
 }
 
+/*
 TEST(PiezasTest, resetTest) {
 	Piezas Game;
 	Game.dropPiece(2);
 	Game.reset();
 	ASSERT_EQ(Game.pieceAt(0,2), Blank);
 }
+*/
 
 TEST(PiezasTest, dropPieceBounds) {
 	Piezas Game;
