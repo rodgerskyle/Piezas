@@ -77,7 +77,7 @@ Piece Piezas::dropPiece(int column)
 **/
 Piece Piezas::pieceAt(int row, int column)
 {
-    if (row < BOARD_ROWS && row > 0 && column < BOARD_COLS && column > 0)
+    if (!(row < BOARD_ROWS || row > 0 || column < BOARD_COLS || column > 0))
         return Invalid;
     else if (board[row][column] != Blank)
         return board[row][column];
@@ -96,13 +96,13 @@ Piece Piezas::pieceAt(int row, int column)
 Piece Piezas::gameState()
 {
     //X Highest & O Highest
-    int Xscore, Oscore = 0;
+    int Xscore = 0, Oscore = 0;
     //X current & O current
-    int Xcur, Ocur = 0;
+    int Xcur = 0, Ocur = 0;
 
     //For Horizontal check
     for (int i=0; i<BOARD_ROWS; i++) {
-        Xcur, Ocur = 0;
+        Xcur = 0, Ocur = 0;
         for (int j=0; j<BOARD_COLS; j++) {
             if (board[i][j] == Blank)
                 return Invalid;
@@ -123,7 +123,7 @@ Piece Piezas::gameState()
 
     //For vertical check
     for (int i=0; i<BOARD_COLS; i++) {
-        Xcur, Ocur = 0;
+        Xcur = 0, Ocur = 0;
         for (int j=0; j<BOARD_ROWS; j++) {
             if (board[i][j] == X) {
                 Xcur += 1;
